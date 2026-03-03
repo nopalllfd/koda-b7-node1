@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-const dateConvertion = (date) => {
+const dateConvertion = async (date) => {
   const validate = moment(date, 'DD-MM-YYYY', true).isValid();
   console.log(`tanggal dimasukkan ${date}`);
   if (!validate) {
