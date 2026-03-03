@@ -6,8 +6,18 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question('Masukan tanggal : ', (date) => {
-  const convert = dateConvertion(date);
-  console.log(convert);
-  rl.close();
+
+rl.setPrompt('Masukkan tanggal / ketik "exit" untuk keluar : ');
+rl.prompt();
+rl.on('line', (line) => {
+  if (line.trim().toLowerCase() === 'exit') {
+    rl.close();
+  } else {
+    line.toString();
+    (function () {
+      const convert = dateConvertion(line);
+      console.log(convert);
+    })();
+    rl.prompt();
+  }
 });
