@@ -1,23 +1,25 @@
 import dateConvertion from './minitask-1.js';
-import readline from 'readline';
+import readline from 'node:readline/promises';
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+async function main() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  let running = true;
 
+  while (running) {
+    const answer = await rl.question('Masukkan tanggal / ketik "exit" untuk berhenti : ');
 
-rl.setPrompt('Masukkan tanggal / ketik "exit" untuk keluar : ');
-rl.prompt();
-rl.on('line', (line) => {
-  if (line.trim().toLowerCase() === 'exit') {
-    rl.close();
-  } else {
-    line.toString();
-    (function () {
-      const convert = dateConvertion(line);
-      console.log(convert);
-    })();
-    rl.prompt();
+    if (answer.trim().toLowerCase() === 'exit') {
+      console.log('Program Selesai');
+      running = false;
+    } else {
+      const result = await dateConvertion(answer);
+      console.log(result);
+    }
   }
-});
+  rl.close();
+}
+
+main();
