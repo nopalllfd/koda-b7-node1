@@ -1,4 +1,13 @@
 import dateConvertion from './minitask-1.js';
-const date = '24-04-2025';
-const convert = dateConvertion(date);
-console.log(convert);
+import readline from 'readline';
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question('Masukan tanggal : ', (date) => {
+  const convert = dateConvertion(date);
+  console.log(convert);
+  rl.close();
+});
